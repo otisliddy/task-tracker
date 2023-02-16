@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  mysql:
+    image: amd64/mysql:5-debian
+    container_name: task-tracker-mysql
+    command: --default-authentication-plugin=mysql_native_password --init-file /data/application/init.sql
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: tasktracker_db
+      MYSQL_USER: taskuser
+      MYSQL_PASSWORD: taskpass
+    volumes:
+      - tasks_db:/var/lib/mysql
+      - ./init.sql:/data/application/init.sql
+    restart: always
+volumes:
+  tasks_db:
