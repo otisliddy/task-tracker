@@ -11,28 +11,26 @@ public class Task implements Serializable {
 
     @Id
     private UUID id;
-
     private Long sumDurations = 0L;
+    private Integer count = 0;
 
-    private Integer count = 1;
+    public Task() {}
 
-    public void setId(UUID id) {
+    public Task(UUID id) {
         this.id = id;
     }
 
-    public Long getSumDurations() {
-        return sumDurations;
+    public Task(UUID id, Long duration) {
+        this.id = id;
+        addDuration(duration);
     }
 
     public void addDuration(Long duration) {
         this.sumDurations += duration;
+        count++;
     }
 
-    public Integer getCount() {
-        return count;
-    }
-
-    public void incrementCount() {
-        this.count++;
+    public Long getAverageDuration() {
+        return sumDurations / count;
     }
 }
