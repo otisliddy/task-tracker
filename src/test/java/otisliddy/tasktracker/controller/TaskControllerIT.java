@@ -1,5 +1,6 @@
-package otisliddy.tasktracker;
+package otisliddy.tasktracker.controller;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -31,6 +32,11 @@ public class TaskControllerIT {
 
     @Autowired
     private TaskRepository repository;
+
+    @BeforeEach
+    void setup() {
+        repository.deleteAll();
+    }
 
     @Test
     void taskPerformed() {
@@ -128,5 +134,4 @@ public class TaskControllerIT {
                 .build()
                 .toUriString();
     }
-
 }
