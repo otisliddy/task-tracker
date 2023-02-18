@@ -45,7 +45,6 @@ public class TaskControllerIT {
 
         webTestClient.post()
                 .uri(uri, id)
-                .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .exchange()
                 .expectStatus()
@@ -80,22 +79,45 @@ public class TaskControllerIT {
     }
 
     @Test
-    void taskPerformed_durationMoreThanMaxInt() {
+    void taskPerformed_idNotUuid() {
+        String uri = buildTaskPerformedUri(10L);
+
+        webTestClient.post()
+                .uri(uri, "not-a-uuid")
+                .accept(MediaType.APPLICATION_JSON)
+                .exchange()
+                .expectStatus()
+                .isBadRequest();
+    }
+
+    @Test
+    void taskPerformed_durationLessThanMin() {
+        String uri = buildTaskPerformedUri(-1L);
+
+        webTestClient.post()
+                .uri(uri, UUID.randomUUID())
+                .accept(MediaType.APPLICATION_JSON)
+                .exchange()
+                .expectStatus()
+                .isBadRequest();
+    }
+
+    @Test
+    void taskPerformed_durationMaxLongValue() {
         UUID id = UUID.randomUUID();
-        Long moreThanMaxInt = Long.valueOf(Integer.MIN_VALUE) + 10L;
-        String uri = buildTaskPerformedUri(moreThanMaxInt);
+        Long duration = Long.MAX_VALUE;
+        String uri = buildTaskPerformedUri(duration);
 
         webTestClient.post()
                 .uri(uri, id)
-                .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
-                .body(Mono.just(moreThanMaxInt), Long.class)
+                .body(Mono.just(duration), Long.class)
                 .exchange()
                 .expectStatus()
                 .isOk();
 
         Task task = repository.findById(id).get();
-        assertEquals(moreThanMaxInt, task.getAverageDuration());
+        assertEquals(duration, task.getAverageDuration());
     }
 
     @Test
@@ -126,6 +148,16 @@ public class TaskControllerIT {
                 .expectBody()
                 .jsonPath("$")
                 .value(containsString(id.toString()));
+    }
+
+    @Test
+    void averageDuration_idNotUuid() {
+        webTestClient.get()
+                .uri(PATH_AVERAGE_DURATION, "not-a-uuid")
+                .accept(MediaType.APPLICATION_JSON)
+                .exchange()
+                .expectStatus()
+                .isBadRequest();
     }
 
     private String buildTaskPerformedUri(Long duration) {
