@@ -28,7 +28,8 @@ public class Task implements Serializable {
     }
 
     public Long getAverageDuration() {
-        return sumDurations / count;
+        double beforeRounding = (1.0 * sumDurations) / count;
+        return Math.round(beforeRounding);
     }
 
     @VisibleForTesting

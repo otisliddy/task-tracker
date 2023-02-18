@@ -37,4 +37,15 @@ public class TaskTest {
 
         assertEquals(8L, task.getAverageDuration());
     }
+
+    @Test
+    void addDuration_rounding() {
+        Task task = new Task(id, 1L);
+        task.addDuration(1L);
+        task.addDuration(2L);
+        assertEquals(1L, task.getAverageDuration()); // unrounded = 1.33
+
+        task.addDuration(3L);
+        assertEquals(2L, task.getAverageDuration()); // unrounded = 1.75
+    }
 }
