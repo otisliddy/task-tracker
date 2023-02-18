@@ -7,6 +7,16 @@ import jakarta.persistence.Id;
 import java.io.Serializable;
 import java.util.UUID;
 
+/**
+ * Represents a MySQL {@code Entity} with columns:
+ * <ul>
+ *     <li>id VARCHAR(36) NOT NULL</li>
+ *     <li>`count` INT(255) NOT NULL</li>
+ *     <li>sumDurations BIGINT(255) NOT NULL</li>
+ * </ul>
+ *
+ * Rather than exposing `count` and sumDurations, this class just exposes what the columns serve to calculate: task average duration.
+ */
 @Entity
 public class Task implements Serializable {
 
