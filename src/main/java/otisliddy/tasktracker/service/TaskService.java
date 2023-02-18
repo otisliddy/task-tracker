@@ -38,5 +38,4 @@ public class TaskService {
                 .orElseThrow(() -> new TaskNotFoundException(id))
                 .getAverageDuration();
     }
-
 }

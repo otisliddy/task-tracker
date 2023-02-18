@@ -91,6 +91,16 @@ public class TaskControllerIT {
     }
 
     @Test
+    void taskPerformed_durationNotPassed() {
+        webTestClient.post()
+                .uri(PATH_TASK_PERFORMED, UUID.randomUUID())
+                .accept(MediaType.APPLICATION_JSON)
+                .exchange()
+                .expectStatus()
+                .isBadRequest();
+    }
+
+    @Test
     void taskPerformed_durationLessThanMin() {
         String uri = buildTaskPerformedUri(-1L);
 
