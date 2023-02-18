@@ -31,7 +31,7 @@ public class TaskController {
     @PostMapping("/performed")
     @Operation(summary = "Register metrics for a task that was performed.")
     public ResponseEntity<Void> taskPerformed(@PathVariable("id") @Parameter(description = "ID of the task.") UUID id,
-                                              @RequestParam("durationMillis") @Min(MIN_DURATION)
+                                              @RequestParam("duration") @Min(MIN_DURATION)
                                               @Parameter(description = "Duration in milliseconds the task took to complete.") Long duration) {
         service.handleTaskPerformed(id, duration);
 

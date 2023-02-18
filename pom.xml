@@ -17,6 +17,7 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <start-class>otisliddy.tasktracker.Application</start-class>
 
         <spring.boot.version>3.0.2</spring.boot.version>
         <swagger.version>2.2.8</swagger.version>
@@ -111,6 +112,7 @@
     </dependencies>
 
     <build>
+        <finalName>task-tracker</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>

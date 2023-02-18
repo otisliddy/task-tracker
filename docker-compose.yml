@@ -1,14 +1,22 @@
 version: "3.9"
 
 services:
+  task-traker:
+    image: openjdk:17.0.2-jdk-slim-bullseye
+    container_name: task-tracker
+    depends_on:
+      - mysql
+    volumes:
+      - ./target/task-tracker.jar:/home/service.jar
+    ports:
+      - "5388:8443"
+    command: java -jar /home/service.jar
   mysql:
     image: amd64/mysql:5-debian
     container_name: task-tracker-mysql
-    command: --default-authentication-plugin=mysql_native_password --init-file /data/application/init.sql
+    command: --init-file /data/application/init.sql
     ports:
       - "3306:3306"
-    expose:
-      - "3306"
     environment:
       MYSQL_ROOT_PASSWORD: rootpass
       MYSQL_DATABASE: tasktracker_db
@@ -17,6 +25,5 @@ services:
     volumes:
       - tasks_db:/var/lib/mysql
       - ./init.sql:/data/application/init.sql
-    restart: always
 volumes:
   tasks_db:

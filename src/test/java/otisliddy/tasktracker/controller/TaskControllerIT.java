@@ -25,7 +25,7 @@ public class TaskControllerIT {
 
     private static final String PATH_TASK_PERFORMED = "/v1/tasks/{id}/performed";
     private static final String PATH_AVERAGE_DURATION = "/v1/tasks/{id}/averageDuration";
-    private static final String QUERY_PARAM_DURATION = "durationMillis";
+    private static final String QUERY_PARAM_DURATION = "duration";
 
     @Autowired
     private WebTestClient webTestClient;
