@@ -3,7 +3,6 @@ package otisliddy.tasktracker.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import otisliddy.tasktracker.service.TaskService;
 
 import java.util.UUID;
+import javax.validation.constraints.Min;
 
 @RestController
 @RequestMapping("/v1/tasks/{id}")

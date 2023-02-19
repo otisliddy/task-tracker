@@ -1,11 +1,11 @@
 package otisliddy.tasktracker.model;
 
 import com.google.common.annotations.VisibleForTesting;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 
 import java.io.Serializable;
 import java.util.UUID;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  * Represents a MySQL {@code Entity} with columns:
@@ -14,7 +14,7 @@ import java.util.UUID;
  *     <li>`count` INT(255) NOT NULL</li>
  *     <li>sumDurations BIGINT(255) NOT NULL</li>
  * </ul>
- *
+ * <p>
  * Rather than exposing `count` and sumDurations, this class just exposes what the columns serve to calculate: task average duration.
  */
 @Entity
