@@ -8,7 +8,6 @@ services:
       - mysql
     volumes:
       - ./target/task-tracker.jar:/home/service.jar
-      - ./src/main/resources/localhost-ssl.p12:/etc/certs/localhost-ssl.p12
     ports:
       - "5388:8443"
     command: java -jar /home/service.jar
